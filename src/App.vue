@@ -1,18 +1,15 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <SelectAndPreviewFiles />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import SelectAndPreviewFiles from './components/molecules/SelectAndPreviewFiles.vue'
 
 export default {
+  components: { SelectAndPreviewFiles },
   name: 'App',
-  components: {
-    HelloWorld
-  }
 }
 </script>
 
