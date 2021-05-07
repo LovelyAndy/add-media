@@ -37,17 +37,17 @@ export default {
   },
   data() {
     return {
-      files: [],
+      // files: [],
     }
   },
   computed: {},
   methods: {
     async addMedia(event) {
       const files = event.target.files || event.dataTransfer.files
-      if (!files.length) return
-      console.log(`files → `, files)
-      this.files.push(files)
-      this.$emit('selected', this.files)
+      // if (!files.length) return
+      // console.log(`files → `, files)
+      // this.files.push(files)
+      this.$emit('selected', files)
     },
 
     openFileDialog() {

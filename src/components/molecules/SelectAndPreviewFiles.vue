@@ -9,14 +9,12 @@
     <!-- <img />
       //OR
       <video /> -->
-    <!-- <img :src="selectedFile" alt="" />-->
+    <!-- <img :src="selectedFile" alt="" />
+    try v-model on UploadMediaFiles right in here
+    -->
+
     <UploadMediaFiles @selected="(files) => selectFiles(files)" v-slot="{ openFileDialog }">
-      <button @click="openFileDialog">
-        <img
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Circle-icons-upload.svg/1200px-Circle-icons-upload.svg.png"
-          alt=""
-        />
-      </button>
+      <button @click="openFileDialog">CLICK ME</button>
     </UploadMediaFiles>
   </div>
 </template>
@@ -48,22 +46,18 @@ export default {
   computed: {},
   methods: {
     selectFiles(files) {
-      this.selectedFiles.push(files)
-      this.previewImage(files)
-    },
-    previewImage(files) {
-      var vm = this
+      // this.selectedFiles.push(files)
+      console.log(`files → `, files)
+      var self = this
       for (var index = 0; index < files.length; index++) {
-        const fileList = files[index]
-        console.log(`fileList → `, fileList)
-        fileList.forEach((file) => {
-          var reader = new FileReader()
-          reader.onload = function (event) {
-            const imageUrl = event.target.result
-            vm.selectedFiles.push(imageUrl)
-          }
-          reader.readAsDataURL(file)
-        })
+        const file = files[index]
+        console.log(`file → `, file)
+        var reader = new FileReader()
+        reader.onload = function (event) {
+          const imageUrl = event.target.result
+          self.selectedFiles.push(imageUrl)
+        }
+        reader.readAsDataURL(file)
       }
     },
     deleteFile(index) {
