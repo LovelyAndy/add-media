@@ -6,14 +6,12 @@
         <button @click="deleteFile(index)">Delete</button>
       </div>
     </div>
-    <!-- <img />
-      //OR
-      <video /> -->
-    <!-- <img :src="selectedFile" alt="" />
-    try v-model on UploadMediaFiles right in here
-    -->
 
-    <UploadMediaFiles @selected="(files) => selectFiles(files)" v-slot="{ openFileDialog }">
+    <UploadMediaFiles
+      v-model="selectedFiles"
+      @selected="(files) => selectFiles(files)"
+      v-slot="{ openFileDialog }"
+    >
       <button @click="openFileDialog">CLICK ME</button>
     </UploadMediaFiles>
   </div>
@@ -46,22 +44,20 @@ export default {
   computed: {},
   methods: {
     selectFiles(files) {
-      // this.selectedFiles.push(files)
-      console.log(`files → `, files)
-      var self = this
-      for (var index = 0; index < files.length; index++) {
+      let self = this
+      for (let index = 0; index < files.length; index++) {
         const file = files[index]
-        console.log(`file → `, file)
-        var reader = new FileReader()
+        let reader = new FileReader()
         reader.onload = function (event) {
           const imageUrl = event.target.result
           self.selectedFiles.push(imageUrl)
         }
         reader.readAsDataURL(file)
       }
+      this.$emit('input', this.selectedFiles)
     },
     deleteFile(index) {
-      this.selectedFiles.splice(index, 1)
+      this.$emit('input', this.selectedFiles.splice(index, 1))
     },
   },
 }

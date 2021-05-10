@@ -36,17 +36,12 @@ export default {
     accept: { type: String },
   },
   data() {
-    return {
-      // files: [],
-    }
+    return {}
   },
   computed: {},
   methods: {
     async addMedia(event) {
       const files = event.target.files || event.dataTransfer.files
-      // if (!files.length) return
-      // console.log(`files → `, files)
-      // this.files.push(files)
       this.$emit('selected', files)
     },
 
