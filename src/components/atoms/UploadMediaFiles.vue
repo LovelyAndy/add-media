@@ -4,8 +4,8 @@
       style="display: none"
       id="input-file"
       type="file"
-      accept="*"
-      multiple
+      :accept="accept"
+      :multiple="multiple"
       @change="addMedia"
       class="_add-media-input"
       ref="input"
@@ -32,8 +32,8 @@ input
 export default {
   name: 'UploadMediaFiles',
   props: {
-    multiple: { type: Boolean },
-    accept: { type: String },
+    multiple: { type: Boolean, default: false },
+    accept: { type: String, default: '*' },
   },
   data() {
     return {}

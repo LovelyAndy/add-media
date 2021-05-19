@@ -11,6 +11,7 @@
       v-model="selectedFiles"
       @selected="(files) => selectFiles(files)"
       v-slot="{ openFileDialog }"
+      :multiple="true"
     >
       <button @click="openFileDialog">CLICK ME</button>
     </UploadMediaFiles>
