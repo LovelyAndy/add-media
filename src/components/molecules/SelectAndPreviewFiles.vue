@@ -2,8 +2,8 @@
   <div class="select-and-preview-files">
     <div v-if="selectedFiles">
       <div :key="index" v-for="(selectedFile, index) in selectedFiles">
-        <img :src="selectedFile" alt="" />
-        <!-- <video controls :src="selectedFile" alt="" /> -->
+        <img v-if="selectedFile.startsWith('data:image')" :src="selectedFile" alt="" />
+        <video v-if="selectedFile.startsWith('data:video')" controls :src="selectedFile" alt="" />
         <button @click="deleteFile(index)">Delete</button>
       </div>
     </div>
@@ -13,6 +13,7 @@
       @selected="selectFiles"
       v-slot="{ openFileDialog }"
       :multiple="true"
+      :accept="'*'"
     >
       <button @click="openFileDialog">CLICK ME</button>
     </UploadMediaFiles>
