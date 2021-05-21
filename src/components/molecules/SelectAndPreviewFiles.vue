@@ -44,11 +44,6 @@ export default {
       selectedFiles: [],
     }
   },
-  watch: {
-    selectedFiles() {
-      console.log(`this.selectedFiles → `, this.selectedFiles)
-    },
-  },
   computed: {},
   methods: {
     selectFiles(files) {
