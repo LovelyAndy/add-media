@@ -22,8 +22,6 @@
 </template>
 
 <style lang="sass" scoped>
-// $
-// .upload-media-files
 input
   display: none
 </style>
@@ -40,9 +38,10 @@ export default {
   },
   computed: {},
   methods: {
-    async addMedia(event) {
+    addMedia(event) {
       const files = event.target.files || event.dataTransfer.files
       this.$emit('selected', files)
+      console.log(`files → `, files)
     },
 
     openFileDialog() {

@@ -3,8 +3,7 @@
     <div v-if="selectedFiles">
       <div :key="index" v-for="(selectedFile, index) in selectedFiles">
         <img :src="selectedFile" alt="" />
-        <!-- check file type here -->
-        <video :src="selectedFile" alt="" />
+        <!-- <video controls :src="selectedFile" alt="" /> -->
         <button @click="deleteFile(index)">Delete</button>
       </div>
     </div>
@@ -44,6 +43,11 @@ export default {
       selectedFiles: [],
     }
   },
+  watch: {
+    selectedFiles() {
+      console.log(`this.selectedFiles → `, this.selectedFiles)
+    },
+  },
   computed: {},
   methods: {
     selectFiles(files) {
@@ -55,9 +59,8 @@ export default {
           const file = files[index]
           let reader = new FileReader()
           reader.onload = function (event) {
-            console.log(`event.target.result → `, event.target.result)
-            const imageUrl = event.target.result
-            self.selectedFiles.push(imageUrl)
+            const url = event.target.result
+            self.selectedFiles.push(url)
             resolve()
           }
           reader.readAsDataURL(file)
