@@ -3,6 +3,7 @@
     <div v-if="selectedFiles">
       <div :key="index" v-for="(selectedFile, index) in selectedFiles">
         <img :src="selectedFile" alt="" />
+        <!-- check file type here -->
         <video :src="selectedFile" alt="" />
         <button @click="deleteFile(index)">Delete</button>
       </div>
@@ -10,7 +11,7 @@
 
     <UploadMediaFiles
       v-model="selectedFiles"
-      @selected="(files) => selectFiles(files)"
+      @selected="selectFiles"
       v-slot="{ openFileDialog }"
       :multiple="true"
     >
@@ -47,19 +48,23 @@ export default {
   methods: {
     selectFiles(files) {
       let self = this
+      let promises = []
       for (let index = 0; index < files.length; index++) {
         // console.log(`files → `, files)
-        const file = files[index]
-        let reader = new FileReader()
-        reader.onload = function (event) {
-          console.log(`event.target.result → `, event.target.result)
-          const imageUrl = event.target.result
-          self.selectedFiles.push(imageUrl)
-        }
-        reader.readAsDataURL(file)
+        let promise = new Promise((resolve, reject) => {
+          const file = files[index]
+          let reader = new FileReader()
+          reader.onload = function (event) {
+            console.log(`event.target.result → `, event.target.result)
+            const imageUrl = event.target.result
+            self.selectedFiles.push(imageUrl)
+            resolve()
+          }
+          reader.readAsDataURL(file)
+        })
+        promises.push(promise)
       }
-      const newArray = [...file]
-      this.$emit('input', newArray)
+      Promise.all(promises).then(() => self.$emit('input', self.selectedFiles))
     },
     deleteFile(index) {
       this.$emit('input', this.selectedFiles.splice(index, 1))
