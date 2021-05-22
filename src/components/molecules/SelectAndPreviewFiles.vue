@@ -50,7 +50,6 @@ export default {
       let self = this
       let promises = []
       for (let index = 0; index < files.length; index++) {
-        // console.log(`files → `, files)
         let promise = new Promise((resolve, reject) => {
           const file = files[index]
           let reader = new FileReader()

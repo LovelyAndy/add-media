@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <SelectAndPreviewFiles />
+    <SelectAndPreviewFiles v-model="selectedFiles" />
   </div>
 </template>
 
@@ -10,6 +10,16 @@ import SelectAndPreviewFiles from './components/molecules/SelectAndPreviewFiles.
 export default {
   components: { SelectAndPreviewFiles },
   name: 'App',
+  data() {
+    return {
+      selectedFiles: [],
+    }
+  },
+  watch: {
+    selectedFiles() {
+      console.log(`this.selectedFiles inside of app→ `, this.selectedFiles)
+    },
+  },
 }
 </script>
 
