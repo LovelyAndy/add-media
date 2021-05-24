@@ -9,7 +9,6 @@
     </div>
 
     <UploadMediaFiles
-      v-model="selectedFiles"
       @selected="selectFiles"
       v-slot="{ openFileDialog }"
       :multiple="true"
