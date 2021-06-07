@@ -16,13 +16,21 @@
     >
       <button @click="openFileDialog">CLICK ME</button>
     </UploadMediaFiles>
+    <button class="btn" @click="share">share</button>
   </div>
 </template>
 
 <style lang="sass" scoped>
-// $
-
-// .select-and-preview-files
+.select-and-preview-files
+  display: flex
+  flex-direction: column
+  justify-content: space-around
+  height: 100vh
+.btn
+  width: 50%
+  align-self: center
+  color: white
+  background-color: indianred
 img
   width: 20%
   margin: auto
@@ -32,6 +40,9 @@ img
 
 <script>
 import UploadMediaFiles from '../atoms/UploadMediaFiles.vue'
+import { Plugins } from '@capacitor/core'
+const { Share } = Plugins
+
 export default {
   name: 'SelectAndPreviewFiles',
   components: {
@@ -65,6 +76,14 @@ export default {
     },
     deleteFile(index) {
       this.$emit('input', this.selectedFiles.splice(index, 1))
+    },
+    async share() {
+      let shareRet = await Share.share({
+        title: 'See cool stuff',
+        text: 'Really awesome thing you need to see right meow',
+        url: 'http://ionicframework.com/',
+        dialogTitle: 'Share with buddies',
+      })
     },
   },
 }

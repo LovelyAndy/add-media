@@ -6,7 +6,11 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "capacitor:build": "vue-cli-service capacitor:build",
-    "capacitor:serve": "vue-cli-service capacitor:serve"
+    "capacitor:serve": "vue-cli-service capacitor:serve",
+    "capacitor:build--android": "vue-cli-service capacitor:build --android",
+    "capacitor:build--ios": "vue-cli-service capacitor:build --ios",
+    "capacitor:serve--android": "vue-cli-service capacitor:serve --android",
+    "capacitor:serve--ios": "vue-cli-service capacitor:serve --ios"
   },
   "dependencies": {
     "@capacitor/android": "^2.0.0",
