@@ -16,11 +16,12 @@
     >
       <button @click="openFileDialog">CLICK ME</button>
     </UploadMediaFiles>
-    <button class="btn1" @click="share">Share w/ Text</button>
-    <button class="btn2" @click="basicShare">Basic Share</button>
-    <button class="btn3" @click="shareImg">Share Image</button>
-    <button class="btn4" @click="shareCapturedImg">Share Captured Image</button>
-    <button class="btn5" @click="shareImgAndText">Share Image and Text</button>
+    <button class="_btn" @click="share">1. Share w/ Text</button>
+    <button class="_btn" @click="basicShare">2. Basic Share</button>
+    <button class="_btn" @click="shareImgURL">3. Share Image URL</button>
+    <button class="_btn" @click="shareImg">4. Share Image</button>
+    <button class="_btn" @click="shareImgLinkAndText">5. Share Image and Text</button>
+    <button class="_btn" @click="shareCapturedImg">6. Share Captured Image</button>
   </div>
 </template>
 
@@ -30,11 +31,7 @@
   flex-direction: column
   justify-content: space-around
   height: 100vh
-.btn1,
-.btn2,
-.btn3,
-.btn4,
-.btn5
+._btn
   width: 50%
   align-self: center
   color: white
@@ -98,8 +95,16 @@ export default {
         url: 'https://www.youtube.com/watch?v=HWZFqEXH5a0',
       })
     },
-    async shareImg() {
+    async shareImgURL() {
       await Share.share({
+        url: 'https://floodmagazine.com/wp-content/uploads/2016/07/Steve_Brule-2016-Marc_Lemoine-7-746x1024.jpg',
+      })
+    },
+    async shareImgLinkAndText() {
+      await Share.share({
+        title: 'A Nice Web App',
+        text: 'WHAT A BEAUTIFUL WEBAPP',
+        url: 'https://weather-boyy.web.app/',
         url: 'https://floodmagazine.com/wp-content/uploads/2016/07/Steve_Brule-2016-Marc_Lemoine-7-746x1024.jpg',
       })
     },
