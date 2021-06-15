@@ -82,6 +82,7 @@ export default {
     deleteFile(index) {
       this.$emit('input', this.selectedFiles.splice(index, 1))
     },
+    /////// Upload Media Stuff ^^^^^^
     async share() {
       await Share.share({
         title: 'A Nice Web App',
@@ -99,6 +100,28 @@ export default {
       await Share.share({
         url: 'https://floodmagazine.com/wp-content/uploads/2016/07/Steve_Brule-2016-Marc_Lemoine-7-746x1024.jpg',
       })
+    },
+    async shareImg() {
+      const urlToFile = async (url) => {
+        const response = await fetch(url)
+        const blob = response.blob()
+        const file = new File([blob], 'image.jpg', { type: blob.type })
+        return file
+      }
+      if (window.navigator.share) {
+        const file = await urlToFile(this.selectedFiles)
+        const files = [file]
+        if (navigator.canShare || !navigator.canShare({ files: files })) {
+          alert('Can use this feature')
+          return
+        }
+        Share.share({
+          files: files,
+          title: 'shared image',
+        })
+          .then(() => console.log('you did it!'))
+          .catch((error) => console.log(`file error → `, error))
+      } else alert('fuck')
     },
     async shareImgLinkAndText() {
       await Share.share({
