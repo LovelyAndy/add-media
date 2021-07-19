@@ -1,5 +1,5 @@
 # add-media
-This is a self-contained parent + child component combination. Currently do not need to upload anything or deal with any databases.
+This is a self-contained parent + child component combination. Not meant to upload anything or deal with any databases on it's own.
 
 
 **Child component (UploadMediaFiles)** 
@@ -7,12 +7,12 @@ This is a self-contained parent + child component combination. Currently do not 
 Renders an invisible `<input type="file" />` and has a slot for that input for which you can pass any type of element to cover that input.
 
 
-The base component gets two props:
+The base component has two props:
 
 `multiple: {type: Boolean}`
 `accept: {type: String}`
 
-When atom is clicked it emits an event `$emit('selected', files)`
+When element is clicked it emits an event `$emit('selected', files)`
 
 
 **Parent component (SelectAndPreviewFiles)**
@@ -45,6 +45,3 @@ npm run serve
 ```
 npm run build
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
